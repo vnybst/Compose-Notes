@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="notes">Notes</string>
+    <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</string>
+    <string name="heading">Lorem ipsum Heading</string>
+    <string name="add_notes_label">Add label</string>
+    <string name="add_new_notes_label">Add new label</string>
+    <string name="add_notes_description">Notes description here</string>
+    <string name="add_notes_heading">Notes heading here</string>
+    <string name="last_modified">Modified 11–01–2023 05:32 PM</string>
+    <string name="search_notes">Search</string>
+    <string name="choose_color">Choose a color for notes background</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="delete">Delete</string>
+    <string name="delete_confirmation">Delete this note permanently?</string>
+</resources>
