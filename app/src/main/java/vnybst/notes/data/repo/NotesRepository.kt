@@ -19,6 +19,10 @@ class NotesRepository(private val notesDao: NotesDao) {
         return notesDao.getAllNotes()
     }
 
+    fun searchNotes(keyword: String): List<Note> {
+        return notesDao.searchNotes(keyword)
+    }
+
     fun getNote(noteId: Long): Note {
         return notesDao.getNote(noteId)
     }

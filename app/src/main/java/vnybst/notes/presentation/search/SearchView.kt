@@ -14,21 +14,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import vnybst.notes.R
 import vnybst.notes.presentation.theme.customFontFamily
 
-@Preview
-@Composable
-fun Preview() {
-    SearchView()
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchView() {
+fun SearchView(
+    onTextChange: (newText: String) -> Unit,
+    onClear: () -> Unit
+) {
     var searchValue by remember {
         mutableStateOf("")
     }
@@ -38,7 +35,11 @@ fun SearchView() {
             .fillMaxWidth()
             .padding(5.dp),
         singleLine = true,
-        value = searchValue, onValueChange = { searchValue = it },
+        value = searchValue,
+        onValueChange = {
+            searchValue = it
+            onTextChange(it)
+        },
         shape = RoundedCornerShape(20.dp),
         leadingIcon = {
             Image(
@@ -55,6 +56,7 @@ fun SearchView() {
                     .padding(8.dp)
                     .clickable {
                         searchValue = ""
+                        onClear()
                     }
             )
         },

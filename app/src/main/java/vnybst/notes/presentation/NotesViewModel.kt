@@ -2,12 +2,8 @@ package vnybst.notes.presentation
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.withContext
@@ -22,7 +18,7 @@ class NotesViewModel(private val notesRepository: NotesRepository) : ViewModel()
     private val tag = NotesViewModel::class.java.simpleName
 
     private val selectedNotesLabel = MutableLiveData<List<String>>()
-    private val selectedBackgroundColor = MutableLiveData<BackgroundColors>()
+    private val selectedBackgroundColor = MutableLiveData<BackgroundColors?>()
 
     suspend fun insertNote(note: Note) {
         withContext(viewModelScope.coroutineContext) {
@@ -78,6 +74,10 @@ class NotesViewModel(private val notesRepository: NotesRepository) : ViewModel()
         selectedNotesLabel.postValue(notesLabel)
     }
 
+    fun searchNotesList(keyWord: String): List<Note> {
+        return notesRepository.searchNotes(keyWord)
+    }
+
     fun getSelectedNotesLabel(): LiveData<List<String>> {
         return selectedNotesLabel
     }
@@ -86,7 +86,7 @@ class NotesViewModel(private val notesRepository: NotesRepository) : ViewModel()
         selectedBackgroundColor.value = backgroundColors
     }
 
-    fun getSelectedBackgroundColor(): LiveData<BackgroundColors> {
+    fun getSelectedBackgroundColor(): LiveData<BackgroundColors?> {
         return selectedBackgroundColor
     }
 

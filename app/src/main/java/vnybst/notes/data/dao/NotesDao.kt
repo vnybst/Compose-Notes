@@ -2,7 +2,7 @@ package vnybst.notes.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.room.OnConflictStrategy.Companion.REPLACE
+import androidx.room.OnConflictStrategy.REPLACE
 import vnybst.notes.data.entities.Note
 import vnybst.notes.data.entities.NoteLabel
 
@@ -24,6 +24,13 @@ interface NotesDao {
     @Delete
     suspend fun deleteNote(note: Note)
 
+    @Query(
+        "SELECT * FROM notes_list WHERE note_heading " +
+                "LIKE '%' || :keyword || '%' OR note_description " +
+                "LIKE '%' || :keyword || '%' OR note_label " +
+                "LIKE '%' || :keyword || '%' "
+    )
+    fun searchNotes(keyword: String): List<Note>
 
     //For notes label
     @Insert(onConflict = REPLACE)
